@@ -1,0 +1,44 @@
+--- Makefile	2014-01-10 22:29:22.911756010 +0800
++++ Makefile	2014-01-10 22:30:10.979756900 +0800
+@@ -456,6 +456,41 @@
+ $(eval $(call application,watchcat,LuCI Support for Watchcat,\
+ 	+PACKAGE_luci-app-watchcat:watchcat))
+ 
++$(eval $(call application,cpulimit,cpulimit-ng LuCI configuration module,\
++	+PACKAGE_luci-app-cpulimit:cpulimit-ng))
++
++$(eval $(call application,goagent,GoAgent Proxy,\
++	+PACKAGE_luci-app-goagent:goagent))
++
++$(eval $(call application,gmediarender,LuCI Support for gmediarender,\
++	+PACKAGE_luci-app-gmediarender:gmediarender))
++
++$(eval $(call application,pdnsd,LuCI Support for pdnsd,\
++	+PACKAGE_luci-app-pdnsd:pdnsd))
++
++$(eval $(call application,redsocks2,LuCI Support for redsocks2,\
++	+PACKAGE_luci-app-redsocks2:redsocks2 \
++	+PACKAGE_luci-app-redsocks2:kmod-ipt-nat \
++	+PACKAGE_luci-app-redsocks2:kmod-ipt-nat-extra \
++	+PACKAGE_luci-app-redsocks2:kmod-ipt-ipset \
++	+PACKAGE_luci-app-redsocks2:ipset))
++
++$(eval $(call application,shadowsocks,LuCI Support for shadowsocks,\
++	+PACKAGE_luci-app-shadowsocks:shadowsocks-libev \
++	+PACKAGE_luci-app-shadowsocks:kmod-ipt-nat \
++	+PACKAGE_luci-app-shadowsocks:kmod-ipt-nat-extra \
++	+PACKAGE_luci-app-shadowsocks:kmod-ipt-ipset \
++	+PACKAGE_luci-app-shadowsocks:ipset))
++
++$(eval $(call application,shairport,LuCI Support for shairport,\
++	+PACKAGE_luci-app-shairport:shairport-new))
++
++$(eval $(call application,upnpaudioplayer,LuCI Support for upnpaudioplayer,\
++	+PACKAGE_luci-app-upnpaudioplayer:upnpaudioplayer))
++
++$(eval $(call application,vsftpd,LuCI Support for vsftpd,\
++	+PACKAGE_luci-app-vsftpd:vsftpd-tls))
++
+ ### Server Gateway Interfaces ###
+ define sgi
+   define Package/luci-sgi-$(1)

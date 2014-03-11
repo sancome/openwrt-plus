@@ -1,0 +1,94 @@
+diff -ruN a/Platinum/Build/Boot.scons b/Platinum/Build/Boot.scons
+--- a/Platinum/Build/Boot.scons	2014-02-27 13:13:19.000000000 +0800
++++ b/Platinum/Build/Boot.scons	2014-02-28 16:32:08.059161047 +0800
+@@ -30,9 +30,9 @@
+ #######################################################
+ options = Variables()
+ options.AddVariables(
+-    EnumVariable('target', 'build target', DefaultTarget(), allowed_values=PLATFORM_TO_TARGET_MAP.values()+CROSS_PLATFORMS+SPECIAL_PLATFORMS),
++    EnumVariable('target', 'build target', 'mips-openwrt-linux', allowed_values=['mips-openwrt-linux']),
+     BoolVariable('stop_on_warning', 'Stop the build on warnings', False),
+-    ListVariable('build_config', 'build configurations', 'Debug', names=['Debug', 'Release'])
++    ListVariable('build_config', 'build configurations', 'Release', names=['Debug', 'Release'])
+ )
+ 
+ env = Environment(variables=options)
+diff -ruN a/Platinum/Build/Build.scons b/Platinum/Build/Build.scons
+--- a/Platinum/Build/Build.scons	2014-02-27 13:13:19.000000000 +0800
++++ b/Platinum/Build/Build.scons	2014-03-01 18:54:18.123467030 +0800
+@@ -195,11 +195,15 @@
+ 
+ LibraryModule(name                  = 'Zlib',
+               source_root           = NPT_SOURCE_ROOT,
+-              build_source_dirs     = ['ThirdParty/zlib-1.2.3'])
++              build_source_dirs     = ['ThirdParty/zlib-1.2.3'],
++              shared                = True,
++              install               = True)
+               
+ LibraryModule(name                  = 'axTLS',
+               source_root           = NPT_SOURCE_ROOT,
+-              build_source_dirs     = ['ThirdParty/axTLS/crypto', 'ThirdParty/axTLS/ssl', 'ThirdParty/axTLS/config/Generic'])
++              build_source_dirs     = ['ThirdParty/axTLS/crypto', 'ThirdParty/axTLS/ssl', 'ThirdParty/axTLS/config/Generic'],
++              shared                = True,
++              install               = True)
+               
+ extra_cpp_flags = []
+ if not env.has_key('NPT_CONFIG_NO_ZIP'):
+@@ -218,32 +222,42 @@
+               build_source_files    = env['NPT_SYSTEM_SOURCES'],
+               extra_cpp_defines     = extra_cpp_flags,
+               linked_modules        = env['NPT_EXTRA_LIBS']+['Zlib']+['axTLS'],
+-              source_root           = NPT_SOURCE_ROOT + '/Source')
++              source_root           = NPT_SOURCE_ROOT + '/Source',
++              shared                = True,
++              install               = True)
+                  
+ # Platinum        
+ LibraryModule(name               = 'Platinum',
+               build_source_dirs  = ['Core', 'Extras'],
+               build_include_dirs = ['Source/Platinum'],
+-              included_modules   = ['Neptune'])
++              included_modules   = ['Neptune'],
++              shared             = True,
++              install            = True)
+ 
+ # Platinum MediaServer         
+ LibraryModule(name               = 'PltMediaServer',
+               build_source_dirs  = ['MediaServer'],
+               included_modules   = ['Platinum'],
+-              source_root        = 'Source/Devices')
++              source_root        = 'Source/Devices',
++              shared             = True,
++              install            = True)
+ 
+ # Platinum MediaRenderer         
+ LibraryModule(name               = 'PltMediaRenderer',
+               build_source_dirs  = ['MediaRenderer'],
+               included_modules   = ['Platinum', 'PltMediaServer'],
+-              source_root        = 'Source/Devices')
++              source_root        = 'Source/Devices',
++              shared             = True,
++              install            = True)
+                  
+ # Platinum MediaConnect         
+ LibraryModule(name               = 'PltMediaConnect',
+               build_source_dirs  = ['MediaConnect'],
+               included_modules   = ['Platinum', 'PltMediaServer', 'PltMediaRenderer'],
+               excluded_files	 = ['MACFromIP.cpp'],
+-              source_root        = 'Source/Devices')
++              source_root        = 'Source/Devices',
++              shared             = True,
++              install            = True)
+                                            
+ for app in ['MicroMediaController', 'MediaCrawler', 'MediaConnect', 'FrameStreamer']:
+     Application(name    = app, 
+diff -ruN a/Platinum/Build/Targets/mips-openwrt-linux/Config.scons b/Platinum/Build/Targets/mips-openwrt-linux/Config.scons
+--- a/Platinum/Build/Targets/mips-openwrt-linux/Config.scons	1970-01-01 08:00:00.000000000 +0800
++++ b/Platinum/Build/Targets/mips-openwrt-linux/Config.scons	2014-02-28 16:33:39.419166804 +0800
+@@ -0,0 +1,6 @@
++LoadTool('gcc-generic', env, gcc_cross_prefix='mips-openwrt-linux')
++
++### Neptune System Files
++env['NPT_SYSTEM_SOURCES']={'System/StdC':'*.cpp', 'System/Bsd':'*.cpp', 'System/Posix':'*.cpp'}
++env['NPT_EXTRA_LIBS']=['pthread']
++

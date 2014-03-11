@@ -1,0 +1,11 @@
+#!/bin/sh
+
+uci -q batch <<-EOF >/dev/null
+	delete ucitrack.@goagent[-1]
+	add ucitrack goagent
+	set ucitrack.@goagent[-1].init=goagent
+	commit ucitrack
+EOF
+
+rm -f /tmp/luci-indexcache
+exit 0

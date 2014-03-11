@@ -1,0 +1,37 @@
+#!/bin/sh /etc/rc.common
+
+START=96
+NAME=gmediarender
+
+PID_FILE=/var/run/${NAME}.pid
+LOG_FILE=/var/log/${NAME}.log
+
+handle_gmediarender() {
+	local config="$1"
+
+	config_get bname "$1" bname "gmediarender"
+	config_get ipaddr "$1" ipaddr "192.168.1.1"
+
+	mac=`ifconfig | awk '/HWaddr/{ print $5;exit }' | sed 's/://g'`
+
+	service_start /usr/bin/${NAME} -I "$ipaddr" -f "$bname" -u "e6572b54-f3c7-2d91-2fb5-"$mac -d -P ${PID_FILE} --logfile ${LOG_FILE}
+}
+
+start() {
+	local enabled
+
+	config_load gmediarender
+	config_get enabled config enabled 0
+	[ $enabled -eq 0 ] && {
+		return 0
+	}
+	config_foreach handle_gmediarender gmediarender
+}
+
+stop() {
+	if [ -f ${PID_FILE} ]; then
+		service_stop /usr/bin/${NAME}
+		kill -9 `cat ${PID_FILE}` >/dev/null 2>&1
+		rm -f ${PID_FILE}
+	fi
+}

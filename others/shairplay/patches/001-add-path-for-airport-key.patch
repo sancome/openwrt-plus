@@ -1,0 +1,12 @@
+diff -ruN a/src/shairplay.c b/src/shairplay.c
+--- a/src/shairplay.c	2014-03-04 13:16:20.618302959 +0800
++++ b/src/shairplay.c	2014-03-04 13:17:21.350304125 +0800
+@@ -346,7 +346,7 @@
+ 	raop_cbs.audio_destroy = audio_destroy;
+ 	raop_cbs.audio_set_volume = audio_set_volume;
+ 
+-	raop = raop_init_from_keyfile(10, &raop_cbs, "airport.key", NULL);
++	raop = raop_init_from_keyfile(10, &raop_cbs, "/etc/airport.key", NULL);
+ 	if (raop == NULL) {
+ 		fprintf(stderr, "Could not initialize the RAOP service\n");
+ 		return -1;

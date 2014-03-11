@@ -1,0 +1,23 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8\n"
+
+msgid "cpulimit-ng"
+msgstr "cpulimit-ng是一个限制CPU最高占用率的程序"
+
+msgid "Settings"
+msgstr "设置"
+
+msgid "enable"
+msgstr "启用"
+
+msgid "exename"
+msgstr "进程名"
+
+msgid "name of the executable program file or path name"
+msgstr "可执行程序的文件名或路径名"
+
+msgid "limit"
+msgstr "限制CPU最高占用率"
+
+msgid "cpulimit"
+msgstr ""

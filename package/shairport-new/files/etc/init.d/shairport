@@ -1,0 +1,42 @@
+#!/bin/sh /etc/rc.common
+
+START=97
+NAME=shairport
+
+PID_FILE=/var/run/${NAME}.pid
+LOG_FILE=/var/log/${NAME}.log
+ERR_FILE=/var/log/${NAME}.err
+
+handle_shairport() {
+	local config="$1"
+
+	config_get bname "$1" bname "shshairport"
+	config_get initbuf "$1" initbuf "220"
+	config_get port "$1" port "5002"
+	config_get password "$1" password
+	config_get_bool daemonize "$1" daemonize 1
+	config_get pcm "$1" pcm "default"
+	config_get ctl "$1" ctl "default"
+	config_get volume "$1" volume "Speaker"
+
+	service_start /usr/bin/${NAME} -a "$bname" -b $initbuf -p $port -d -P ${PID_FILE} -l ${LOG_FILE} -e ${ERR_FILE}
+}
+
+start() {
+	local enabled
+
+	config_load shairport
+	config_get enabled config enabled 0
+	[ $enabled -eq 0 ] && {
+		return 0
+	}
+	config_foreach handle_shairport shairport
+}
+
+stop() {
+	if [ -f ${PID_FILE} ]; then
+		service_stop /usr/bin/${NAME}
+		kill -9 `cat ${PID_FILE}` >/dev/null 2>&1
+		rm -f ${PID_FILE}
+	fi
+}

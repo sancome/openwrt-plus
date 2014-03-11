@@ -1,0 +1,17 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
+msgid "Enable"
+msgstr "启动"
+
+msgid "upnpaudioplayer"
+msgstr "upnpaudioplayer"
+
+msgid "upnpaudioplayer is not running"
+msgstr "upnpaudioplayer 未运行"
+
+msgid "upnpaudioplayer is running"
+msgstr "upnpaudioplayer 运行中"
+
+msgid "Friendly Name"
+msgstr "运行名称"

@@ -1,0 +1,23 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
+msgid "Enable"
+msgstr "启动"
+
+msgid "gmediarender"
+msgstr "gmediarender"
+
+msgid "gmediarender is not running"
+msgstr "gmediarender 未运行"
+
+msgid "gmediarender is running"
+msgstr "gmediarender 运行中"
+
+msgid "Friendly Name"
+msgstr "显示名称"
+
+msgid "Listen IP"
+msgstr "监听 IP 地址"
+
+msgid "only one, 0.0.0.0 won't work."
+msgstr "不支持 0.0.0.0 的地址"

@@ -1,0 +1,8 @@
+diff -u a/autogen.sh b/autogen.sh
+--- a/autogen.sh	2014-03-02 23:03:06.188063158 +0800
++++ b/autogen.sh	2014-03-02 23:03:20.312062926 +0800
+@@ -1,4 +1,3 @@
+ #! /bin/sh
+-gtkdocize || exit 1
+ ACLOCAL="${ACLOCAL-aclocal} $ACLOCAL_FLAGS" autoreconf -v -f --install || exit 1
+ ./configure --enable-maintainer-mode --enable-debug "$@"

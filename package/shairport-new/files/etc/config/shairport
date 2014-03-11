@@ -1,0 +1,3 @@
+config shairport config
+	option enabled '0'
+	option bname 'Shairport on Openwrt'

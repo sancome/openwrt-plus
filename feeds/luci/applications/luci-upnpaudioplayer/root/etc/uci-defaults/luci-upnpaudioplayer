@@ -1,0 +1,11 @@
+#!/bin/sh
+
+uci -q batch <<-EOF >/dev/null
+	delete ucitrack.@upnpaudioplayer[-1]
+	add ucitrack upnpaudioplayer
+	set ucitrack.@upnpaudioplayer[-1].init=upnpaudioplayer
+	commit ucitrack
+EOF
+
+rm -f /tmp/luci-indexcache
+exit 0

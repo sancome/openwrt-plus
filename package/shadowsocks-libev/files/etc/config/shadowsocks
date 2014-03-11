@@ -1,0 +1,11 @@
+config shadowsocks config
+	option enabled '0'
+	option remote_server 'ss.jybox.net'
+	option remote_port '65535'
+	option local_port '1080'
+	option cipher 'aes-256-cfb'
+	option password '6Zi/54u45Za1'
+	option whitelist_enabled '0'
+	option blacklist_enabled '0'
+	option redir_port '8080'
+	option redir_enabled '0'

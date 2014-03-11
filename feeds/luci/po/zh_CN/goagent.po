@@ -1,0 +1,26 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
+msgid "Enable"
+msgstr "启动"
+
+msgid "goagent"
+msgstr "goagent"
+
+msgid "goagent is not running"
+msgstr "goagent 未运行"
+
+msgid "goagent is running"
+msgstr "goagent 运行中"
+
+msgid "Listen IP"
+msgstr "监听 IP 地址"
+
+msgid "Listen Port"
+msgstr "监听端口"
+
+msgid "AppID"
+msgstr "AppID"
+
+msgid "Use \"|\" to seperate each AppID."
+msgstr "使用 \"|\" 分隔每个 AppID"

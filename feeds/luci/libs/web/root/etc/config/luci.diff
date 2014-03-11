@@ -1,0 +1,11 @@
+--- luci	2014-02-21 13:54:41.735301961 +0800
++++ luci	2014-02-21 13:54:59.967302788 +0800
+@@ -1,6 +1,6 @@
+ config core main
+-	option lang auto
+-	option mediaurlbase /luci-static/openwrt.org
++	option lang zh_cn
++	option mediaurlbase /luci-static/bootstrap
+ 	option resourcebase /luci-static/resources
+ 	
+ config extern flash_keep
